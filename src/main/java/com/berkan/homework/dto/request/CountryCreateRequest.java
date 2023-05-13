@@ -2,10 +2,8 @@ package com.berkan.homework.dto.request;
 
 import lombok.*;
 
-@Data
+@Getter
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class CountryCreateRequest {
 
     private String name;

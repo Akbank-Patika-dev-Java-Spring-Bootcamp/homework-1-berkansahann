@@ -2,10 +2,8 @@ package com.berkan.homework.dto.response;
 
 import lombok.*;
 
-@Data
+@Getter
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class CountryCreateResponse {
 
     private String name;

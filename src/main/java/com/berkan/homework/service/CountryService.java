@@ -6,6 +6,7 @@ import com.berkan.homework.dto.response.CountryCreateResponse;
 import com.berkan.homework.dto.response.CountryFindResponse;
 import com.berkan.homework.dto.response.CountryPresidentUpdateResponse;
 import com.berkan.homework.entity.Country;
+import com.berkan.homework.mapper.CountryMapper;
 import com.berkan.homework.repository.CountryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import java.util.List;
 public class CountryService {
 
     private final CountryRepository countryRepository;
+    private final CountryMapper countryMapper;
 
     public CountryCreateResponse createCountry(CountryCreateRequest request) {
         var country = Country.builder()
@@ -25,10 +27,7 @@ public class CountryService {
                 .president(request.getPresident())
                 .build();
         countryRepository.save(country);
-        return CountryCreateResponse.builder()
-                .name(country.getName())
-                .president(country.getPresident())
-                .build();
+        return countryMapper.countryToCountryCreateResponse(country);
     }
 
     public List<Country> getAllCountries() {
@@ -40,19 +39,12 @@ public class CountryService {
                 .orElseThrow();
         country.setPresident(request.getPresident());
         countryRepository.save(country);
-        return CountryPresidentUpdateResponse.builder()
-                .name(country.getName())
-                .president(country.getPresident())
-                .build();
+        return countryMapper.countryToCountryPresidentUpdateResponse(country);
     }
 
     public CountryFindResponse getCountryById(@PathVariable long id) {
-        var country = countryRepository.findById(id)
+        Country country = countryRepository.findById(id)
                 .orElseThrow();
-        return CountryFindResponse.builder()
-                .id(country.getId())
-                .name(country.getName())
-                .president(country.getPresident())
-                .build();
+        return countryMapper.countryToCountryFindResponse(country);
     }
 }
