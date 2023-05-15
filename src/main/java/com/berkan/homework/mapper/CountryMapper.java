@@ -1,5 +1,6 @@
 package com.berkan.homework.mapper;
 
+import com.berkan.homework.dto.request.CountryCreateRequest;
 import com.berkan.homework.dto.response.CountryCreateResponse;
 import com.berkan.homework.dto.response.CountryFindResponse;
 import com.berkan.homework.dto.response.CountryPresidentUpdateResponse;
@@ -15,4 +16,6 @@ public interface CountryMapper {
     CountryPresidentUpdateResponse countryToCountryPresidentUpdateResponse(Country country);
 
     CountryCreateResponse countryToCountryCreateResponse(Country country);
+
+    Country countryCreateRequestToCountry(CountryCreateRequest request);
 }

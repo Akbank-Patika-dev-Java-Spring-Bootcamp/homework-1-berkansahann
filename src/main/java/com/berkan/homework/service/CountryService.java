@@ -22,10 +22,7 @@ public class CountryService {
     private final CountryMapper countryMapper;
 
     public CountryCreateResponse createCountry(CountryCreateRequest request) {
-        var country = Country.builder()
-                .name(request.getName())
-                .president(request.getPresident())
-                .build();
+        Country country = countryMapper.countryCreateRequestToCountry(request);
         countryRepository.save(country);
         return countryMapper.countryToCountryCreateResponse(country);
     }
@@ -35,7 +32,7 @@ public class CountryService {
     }
 
     public CountryPresidentUpdateResponse updateCountryPresident(long id, CountryPresidentUpdateRequest request) {
-        var country = countryRepository.findById(id)
+        Country country = countryRepository.findById(id)
                 .orElseThrow();
         country.setPresident(request.getPresident());
         countryRepository.save(country);
@@ -47,4 +44,5 @@ public class CountryService {
                 .orElseThrow();
         return countryMapper.countryToCountryFindResponse(country);
     }
+
 }
