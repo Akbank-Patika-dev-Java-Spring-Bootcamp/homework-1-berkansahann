@@ -42,7 +42,7 @@ public class CountryService {
         return countryMapper.countryToCountryPresidentUpdateResponse(country);
     }
 
-    public CountryFindResponse getCountryById(@PathVariable long id) {
+    public CountryFindResponse getCountryById(long id) {
         Country country = countryRepository.findById(id)
                 .orElseThrow();
         return countryMapper.countryToCountryFindResponse(country);
